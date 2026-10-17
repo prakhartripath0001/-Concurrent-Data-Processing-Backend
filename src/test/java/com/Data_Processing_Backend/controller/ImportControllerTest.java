@@ -1,8 +1,8 @@
 package com.Data_Processing_Backend.controller;
 
 import com.Data_Processing_Backend.entity.ImportJob;
-import com.Data_Processing_Backend.entity.JobStatus;
-import com.Data_Processing_Backend.entity.ProcessingMode;
+import com.Data_Processing_Backend.entity.enums.JobStatus;
+import com.Data_Processing_Backend.entity.enums.ProcessingMode;
 import com.Data_Processing_Backend.repository.ImportJobRepository;
 import com.Data_Processing_Backend.repository.InventoryRepository;
 import org.junit.jupiter.api.BeforeEach;

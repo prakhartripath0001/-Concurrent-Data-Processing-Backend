@@ -3,7 +3,7 @@ package com.Data_Processing_Backend.service;
 import com.Data_Processing_Backend.config.ImportProperties;
 import com.Data_Processing_Backend.dto.CsvRecord;
 import com.Data_Processing_Backend.dto.ImportResult;
-import com.Data_Processing_Backend.entity.ProcessingMode;
+import com.Data_Processing_Backend.entity.enums.ProcessingMode;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 

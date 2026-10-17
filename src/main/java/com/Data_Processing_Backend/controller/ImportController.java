@@ -1,7 +1,7 @@
 package com.Data_Processing_Backend.controller;
 
 import com.Data_Processing_Backend.entity.ImportJob;
-import com.Data_Processing_Backend.entity.ProcessingMode;
+import com.Data_Processing_Backend.entity.enums.ProcessingMode;
 import com.Data_Processing_Backend.repository.ImportJobRepository;
 import com.Data_Processing_Backend.service.CsvImportService;
 import org.springframework.http.HttpStatus;

@@ -1,7 +1,7 @@
 package com.Data_Processing_Backend.service;
 
 import com.Data_Processing_Backend.dto.ImportResult;
-import com.Data_Processing_Backend.entity.ProcessingMode;
+import com.Data_Processing_Backend.entity.enums.ProcessingMode;
 import com.Data_Processing_Backend.repository.InventoryRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

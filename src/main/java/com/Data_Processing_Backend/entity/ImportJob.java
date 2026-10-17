@@ -1,6 +1,8 @@
 package com.Data_Processing_Backend.entity;
 
 import com.Data_Processing_Backend.dto.ImportResult;
+import com.Data_Processing_Backend.entity.enums.JobStatus;
+import com.Data_Processing_Backend.entity.enums.ProcessingMode;
 import jakarta.persistence.*;
 import java.time.Instant;
 
