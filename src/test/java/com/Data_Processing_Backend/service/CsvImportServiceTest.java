@@ -1,20 +1,32 @@
-package com.Data_Processing_Backend.imports;
+package com.Data_Processing_Backend.service;
 
+import com.Data_Processing_Backend.dto.ImportResult;
+import com.Data_Processing_Backend.entity.ProcessingMode;
 import com.Data_Processing_Backend.repository.InventoryRepository;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.mock.web.MockMultipartFile;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
 class CsvImportServiceTest {
-    @Autowired CsvImportService service;
-    @Autowired InventoryRepository inventoryRepository;
 
-    @BeforeEach void clearDatabase() { inventoryRepository.deleteAll(); }
+    @Autowired
+    private CsvImportService service;
 
-    @Test void sequentialImportSeparatesValidInvalidAndDuplicates() {
+    @Autowired
+    private InventoryRepository inventoryRepository;
+
+    @BeforeEach
+    void clearDatabase() {
+        inventoryRepository.deleteAll();
+    }
+
+    @Test
+    void sequentialImportSeparatesValidInvalidAndDuplicates() {
         ImportResult result = service.process(file("""
                 entryCode,name,batchNumber,quantity,price,expiryDate
                 MED-1,Aspirin,B1,10,12.50,2030-01-01
@@ -22,6 +34,7 @@ class CsvImportServiceTest {
                 MED-2,Paracetamol,B2,-1,4.00,2030-01-01
                 MED-3,Ibuprofen,B3,5,2.00,2030-01-01
                 """), ProcessingMode.SEQUENTIAL);
+
         assertThat(result.total()).isEqualTo(4);
         assertThat(result.valid()).isEqualTo(2);
         assertThat(result.invalid()).isEqualTo(1);
@@ -30,7 +43,8 @@ class CsvImportServiceTest {
         assertThat(inventoryRepository.count()).isEqualTo(2);
     }
 
-    @Test void parallelHasSameOutputAsSequentialForFreshDataset() {
+    @Test
+    void parallelHasSameOutputAsSequentialForFreshDataset() {
         String csv = """
                 entryCode,name,batchNumber,quantity,price,expiryDate
                 MED-10,A,B1,1,1.00,2030-01-01
@@ -47,5 +61,8 @@ class CsvImportServiceTest {
         assertThat(parallel.invalid()).isEqualTo(sequential.invalid());
         assertThat(parallel.duplicates()).isEqualTo(sequential.duplicates());
     }
-    private MockMultipartFile file(String content) { return new MockMultipartFile("file", "inventory.csv", "text/csv", content.getBytes()); }
+
+    private MockMultipartFile file(String content) {
+        return new MockMultipartFile("file", "inventory.csv", "text/csv", content.getBytes());
+    }
 }
