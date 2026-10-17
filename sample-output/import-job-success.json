@@ -1,0 +1,11 @@
+{
+  "id": "example-job-id",
+  "mode": "PARALLEL",
+  "status": "COMPLETED",
+  "totalRecords": 10000,
+  "successfulRecords": 10000,
+  "failedRecords": 0,
+  "duplicateRecords": 0,
+  "durationMillis": "<measured-at-runtime>",
+  "errors": ""
+}

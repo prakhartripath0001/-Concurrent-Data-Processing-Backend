@@ -53,7 +53,7 @@ Before running the application locally, ensure you have:
     ```
 * **Git** installed.
 * **Maven**: Not required separately. The bundled Maven Wrapper (`mvnw` / `mvnw.cmd`) is used.
-* **Database**: Runs out-of-the-box with an embedded **H2 in-memory database** (no PostgreSQL or MySQL setup required).
+* **Database**: MySQL 8+ running on localhost:3306. The default connection uses database inventory_db with username root and password root; update src/main/resources/application.properties if your local credentials differ.
 
 ---
 
@@ -239,3 +239,16 @@ entryCode,name,batchNumber,quantity,price,expiryDate
 
 * Quoted values and escaped quotes (`"value, with comma"`, `"escaped ""quote"""`) are properly parsed.
 * Rows with invalid formats or validation failures are recorded in the job error report (up to 1,000 row errors) without aborting valid row transactions.
+
+## Submission Artifacts
+
+| Deliverable | Location |
+| :--- | :--- |
+| Source code | src/main/java |
+| Unit and integration tests | src/test/java |
+| Database schema | db/schema.sql |
+| API documentation | This README |
+| CSV sample inputs | sample-data/ |
+| Example API outputs | sample-output/ |
+| Test and live-health results | docs/results-report.md |
+| Benchmark procedure | docs/benchmark-report.md |

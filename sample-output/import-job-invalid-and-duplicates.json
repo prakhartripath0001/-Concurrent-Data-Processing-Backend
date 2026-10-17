@@ -1,0 +1,11 @@
+{
+  "id": "example-job-id",
+  "mode": "SEQUENTIAL",
+  "status": "COMPLETED",
+  "totalRecords": 5,
+  "successfulRecords": 1,
+  "failedRecords": 3,
+  "duplicateRecords": 1,
+  "durationMillis": "<measured-at-runtime>",
+  "errors": "4: quantity must be zero or positive\\n5: price must be greater than zero\\n6: expiryDate must be in the future"
+}

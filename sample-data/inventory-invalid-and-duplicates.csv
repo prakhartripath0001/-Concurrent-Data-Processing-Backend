@@ -1,0 +1,6 @@
+entryCode,name,batchNumber,quantity,price,expiryDate
+MED-10001,Amoxicillin 500mg,BATCH-10001,100,14.50,2030-12-31
+MED-10001,Amoxicillin 500mg,BATCH-10001,100,14.50,2030-12-31
+MED-10002,Paracetamol,BATCH-10002,-5,5.25,2030-12-31
+MED-10003,Ibuprofen,BATCH-10003,10,0,2030-12-31
+MED-10004,Cetirizine,BATCH-10004,10,7.50,2020-01-01
