@@ -1,6 +1,7 @@
 package com.Data_Processing_Backend.imports;
 
-import com.Data_Processing_Backend.inventory.*;
+import com.Data_Processing_Backend.entity.Inventory;
+import com.Data_Processing_Backend.repository.InventoryRepository;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

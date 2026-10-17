@@ -31,13 +31,21 @@ public class CsvImportService {
     private ImportResult parallel(BufferedReader reader, long started) throws IOException {
         Counters counters = new Counters(); Set<String> keys = ConcurrentHashMap.newKeySet();
         ThreadPoolExecutor executor = new ThreadPoolExecutor(properties.parallelism(), properties.parallelism(), 0, TimeUnit.MILLISECONDS, new ArrayBlockingQueue<>(properties.queueCapacity()), new ThreadPoolExecutor.CallerRunsPolicy());
-        List<Future<?>> futures = new ArrayList<>(); String line; long row = 1;
+        String line; long row = 1;
         try {
-            while ((line = reader.readLine()) != null) { row++; final String taskLine = line; final long taskRow = row; futures.add(executor.submit(() -> processLine(taskLine, taskRow, keys, counters))); }
-            for (Future<?> future : futures) future.get();
-        } catch (InterruptedException ex) { Thread.currentThread().interrupt(); throw new IllegalStateException("Import interrupted", ex); }
-          catch (ExecutionException ex) { throw new IllegalStateException("Import task failed", ex.getCause()); }
-        finally { executor.shutdown(); }
+            while ((line = reader.readLine()) != null) {
+                row++;
+                final String taskLine = line;
+                final long taskRow = row;
+                executor.execute(() -> processLine(taskLine, taskRow, keys, counters));
+            }
+        } finally { executor.shutdown(); }
+        try {
+            if (!executor.awaitTermination(30, TimeUnit.MINUTES)) throw new IllegalStateException("Import timed out");
+        } catch (InterruptedException ex) {
+            Thread.currentThread().interrupt();
+            throw new IllegalStateException("Import interrupted", ex);
+        }
         return counters.result(started);
     }
     private void processLine(String line, long row, Set<String> keys, Counters counters) {

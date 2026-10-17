@@ -1,6 +1,6 @@
 package com.Data_Processing_Backend.common;
 
-import com.Data_Processing_Backend.inventory.*;
+import com.Data_Processing_Backend.exception.*;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.*;
 import org.springframework.web.bind.MethodArgumentNotValidException;
